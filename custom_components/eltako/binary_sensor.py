@@ -114,6 +114,8 @@ class EltakoBinarySensor(AbstractBinarySensor):
     Supported EEPs (EnOcean Equipment Profiles):
     - F6-02-01 (Light and Blind Control - Application Style 2)
     - F6-02-02 (Light and Blind Control - Application Style 1)
+    - F6-03-01 (Light and Blind Control, Rocker Switch, 4 Rocker)
+    - F6-03-02 (Light and Blind Control, Rocker Switch, 4 Rocker, Application Style 2 (US))
     - F6-10-00
     - D5-00-01
     """
@@ -190,7 +192,7 @@ class EltakoBinarySensor(AbstractBinarySensor):
 
 
         # wall switches
-        if self.dev_eep in [F6_02_01, F6_02_02]:
+        if self.dev_eep in [F6_02_01, F6_02_02, F6_03_01, F6_03_02]:
             # LOGGER.debug("[Binary Sensor][%s] Received msg for processing eep %s telegram.", b2s(self.dev_id), self.dev_eep.eep_string)
             pressed_buttons = []
             pressed = decoded.energy_bow == 1
@@ -214,6 +216,14 @@ class EltakoBinarySensor(AbstractBinarySensor):
                     pressed_buttons += ["RB"]
                 if fa == 3:
                     pressed_buttons += ["RT"]
+                if fa == 4:
+                    pressed_buttons += ["LCB"]
+                if fa == 5:
+                    pressed_buttons += ["LCT"]
+                if fa == 6:
+                    pressed_buttons += ["RCB"]
+                if fa == 7:
+                    pressed_buttons += ["RCT"]
             if two_buttons_pressed:
                 if sa == 0:
                     pressed_buttons += ["LB"]
@@ -223,6 +233,14 @@ class EltakoBinarySensor(AbstractBinarySensor):
                     pressed_buttons += ["RB"]
                 if sa == 3:
                     pressed_buttons += ["RT"]
+                if sa == 4:
+                    pressed_buttons += ["LCB"]
+                if sa == 5:
+                    pressed_buttons += ["LCT"]
+                if sa == 6:
+                    pressed_buttons += ["RCB"]
+                if sa == 7:
+                    pressed_buttons += ["RCT"]
 
             # fire first event for the entire switch
             event_data.update({

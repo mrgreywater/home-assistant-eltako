@@ -37,6 +37,8 @@ from homeassistant.const import (
 CONF_EEP_SUPPORTED_BINARY_SENSOR = [F6_01_01.eep_string, 
                                     F6_02_01.eep_string, 
                                     F6_02_02.eep_string, 
+                                    F6_03_01.eep_string, 
+                                    F6_03_02.eep_string, 
                                     F6_10_00.eep_string, 
                                     D5_00_01.eep_string, 
                                     A5_07_01.eep_string, 
