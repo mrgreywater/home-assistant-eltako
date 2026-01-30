@@ -48,6 +48,7 @@ class EltakoEntity(Entity):
         self.description_key = description_key
         self._attr_unique_id = config_helpers.get_device_id(gateway.dev_id, self.dev_id, self._get_description_key())
         self.entity_id = f"{self._attr_ha_platform}.{self._attr_unique_id}"
+        self._attr_name = None
 
         LOGGER.debug(f"[{self._attr_ha_platform} {self.dev_id}] Added entity {self.dev_name} ({type(self).__name__}).")
 
