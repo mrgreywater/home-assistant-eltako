@@ -27,7 +27,7 @@
     },
     "abort": {
       "invalid_gateway_path": "Invalid gateway path",
-      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+      "single_instance_allowed": "Only a single configuration of Eltako is allowed."
     }
   },
   "entity": {

@@ -236,6 +236,7 @@ SENSOR_DESC_ILLUMINATION = EltakoSensorEntityDescription(
 
 SENSOR_DESC_TEMPERATURE = EltakoSensorEntityDescription(
     key=SENSOR_TYPE_TEMPERATURE,
+    translation_key="temperature",
     name="Temperature",
     native_unit_of_measurement=UnitOfTemperature.CELSIUS,
     icon="mdi:thermometer",
@@ -256,12 +257,14 @@ SENSOR_DESC_TARGET_TEMPERATURE = EltakoSensorEntityDescription(
 
 SENSOR_DESC_HUMIDITY = EltakoSensorEntityDescription(
     key=SENSOR_TYPE_HUMIDITY,
+    translation_key="humidity",
     name="Humidity",
     native_unit_of_measurement=PERCENTAGE,
     icon="mdi:water-percent",
     device_class=SensorDeviceClass.HUMIDITY,
     state_class=SensorStateClass.MEASUREMENT,
     suggested_display_precision=1,
+
 )
 
 SENSOR_DESC_VOLTAGE = EltakoSensorEntityDescription(
@@ -446,6 +449,10 @@ class EltakoSensor(EltakoEntity, RestoreEntity, SensorEntity):
         """Initialize the Eltako sensor device."""
         self.entity_description = description
         self._attr_state_class = description.state_class
+
+        if getattr(description, "translation_key", None) is not None:
+            LOGGER.debug(f"[{self._attr_ha_platform} {dev_id}] Setting translation_key: {description.translation_key}")
+            self._attr_translation_key = description.translation_key
         
         super().__init__(platform, gateway, dev_id, dev_name, dev_eep)
         self._attr_native_value = None
@@ -453,7 +460,10 @@ class EltakoSensor(EltakoEntity, RestoreEntity, SensorEntity):
     @property
     def name(self):
         """Return the default name for the sensor."""
+        if getattr(self.entity_description, "translation_key", None) is not None:
+            return self._attr_translation_key
         return self.entity_description.name
+#        return self.entity_description.name
 
     def load_value_initially(self, latest_state:State):
         LOGGER.debug(f"[{self._attr_ha_platform} {self.dev_id}] eneity unique_id: {self.unique_id}")

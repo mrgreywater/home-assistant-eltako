@@ -1,0 +1,43 @@
+{
+  "config": {
+    "step": {
+      "detect": {
+        "title": "Wählen Sie den Pfad zu Ihrem Eltako-Gateway (Test DE)",
+        "description": "Wählen Sie das Eltako Gateway (Test DE)",
+        "data": {
+          "path": "USB-Gateway-Pfad",
+          "gateway_description": "EnOcean Gateway",
+          "serial_path": "Serieller Port/IP-Adresse"
+        }
+      },
+      "manual": {
+        "title": "Geben Sie den Pfad zu Ihrem Eltako-Gateway ein (Test DE)",
+        "description": "Geben Sie den Pfad zum Eltako Gateway ein (Test DE)",
+        "data": {
+          "path": "USB-Gateway-Pfad",
+          "gateway_description": "EnOcean Gateway",
+          "serial_path": "Serieller Port/IP-Adresse"
+        }
+      }
+    },
+    "error": {
+      "invalid_gateway_path": "Kein gültiges Gateway für diesen Pfad gefunden",
+      "no_serial_path_available": "Kein serieller Pfad verfügbar. Versuchen Sie, Ihren USB-Stecker neu zu verbinden.",
+      "no_gateway_configuration_available": "Keine Gateway-Konfiguration verfügbar. Geben Sie das Gateway in '/homeassistant/configuration.yaml' ein."
+    },
+    "abort": {
+      "invalid_gateway_path": "Ungültiger Gateway-Pfad",
+      "single_instance_allowed": "Es ist nur eine Eltako-Konfiguration erlaubt."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "temperature": {
+        "name": "Temperatur"
+      },
+      "humidity": {
+        "name": "Feuchtigkeit"
+      }
+    }
+  }
+}
