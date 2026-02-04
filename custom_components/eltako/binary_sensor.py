@@ -373,7 +373,7 @@ class EltakoBinarySensor(AbstractBinarySensor):
             pushed_duration = float(release_telegram_received_time - push_telegram_received_time)
 
             if push_telegram_received_time == -1:
-                raise Exception(f"[{Platform.BINARY_SENSOR} {b2(self.dev_id)}] EEP {self.dev_eep.eep_string}: No information about previouse event.")
+                raise Exception(f"[{Platform.BINARY_SENSOR} {b2s(self.dev_id)}] EEP {self.dev_eep.eep_string}: No information about previouse event.")
         
             event_data.update({
                 "push_telegram_received_time_in_sec": push_telegram_received_time,
